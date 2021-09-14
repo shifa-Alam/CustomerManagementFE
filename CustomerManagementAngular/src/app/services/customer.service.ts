@@ -8,7 +8,7 @@ import { Customer } from '../models/customer';
   providedIn: 'root'
 })
 export class CustomerService {
-  private url = 'api/customer';
+  private url = 'https://localhost:44395/customer';
   constructor(private http: HttpClient
   ) { }
 
@@ -18,7 +18,7 @@ export class CustomerService {
       .pipe(
         tap(_ => this.log('fetched Customers')),
         catchError(this.handleError<Customer[]>('getCustomers', []))
-      );
+    );
   }
 
   /**
