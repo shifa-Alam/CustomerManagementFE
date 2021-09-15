@@ -1,11 +1,47 @@
-<!-- <app-build-in></app-build-in> -->
 
-<div class="row">
-    <div class="col-md-4">
-        <app-customer-list></app-customer-list>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    
+            <mat-toolbar color="primary">
+                <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                    *ngIf="isHandset$ | async">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+    
+                <a class="title" routerLink="/dashboard">{{title}}</a>
+                <span class="spacer"></span>
+                <span class="spacer"></span>          
+            </mat-toolbar>
+    
+        </div>
     </div>
-    <div class="col-md-8">
-        <app-customer></app-customer>
+    
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    
+            <mat-sidenav-container class="sidenav-container">
+                <mat-sidenav #drawer class="sidenav mat-elevation-z8" fixedInViewport="true"
+                    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    
+                    <mat-nav-list>
+                        <!-- <mat-list *ngFor="let item of navItems ;">
+                            <mat-list-item routerLinkActive='active'>
+                            </mat-list-item>
+                        </mat-list> -->
+                        <app-customer-list></app-customer-list>
+                    </mat-nav-list>
+                </mat-sidenav>
+                <mat-sidenav-content>
+                    <div class="grid-container">
+                        <router-outlet></router-outlet>
+                    </div>
+                </mat-sidenav-content>
+            </mat-sidenav-container>
+        </div>
+    
     </div>
+   
 </div>
-<router-outlet></router-outlet>

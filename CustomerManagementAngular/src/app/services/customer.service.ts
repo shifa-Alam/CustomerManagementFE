@@ -8,7 +8,7 @@ import { Customer } from '../models/customer';
   providedIn: 'root'
 })
 export class CustomerService {
-  private url = 'https://localhost:44395/customer';
+  private url = 'https://localhost:44395/api/customer';
   constructor(private http: HttpClient
   ) { }
 
@@ -20,6 +20,15 @@ export class CustomerService {
         catchError(this.handleError<Customer[]>('getCustomers', []))
     );
   }
+
+  findCustomerByIdAsync(id:number): Observable<Customer> {
+    return this.http.get<Customer>(`${this.url}/${id}`)
+      .pipe(
+        tap(_ => this.log('fetched Customer')),
+        catchError(this.handleError<Customer>(`FindCustomerByIdAsync/${id}`))
+    );
+  }
+
 
   /**
  * Handle Http operation that failed.

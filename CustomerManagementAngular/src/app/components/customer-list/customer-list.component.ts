@@ -10,7 +10,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
   constructor(private customerService: CustomerService) { }
-
+  profileImage: string = "/src/assets/images/default-user.png";
   ngOnInit() {
     this.getCustomers();
   }
@@ -18,6 +18,7 @@ export class CustomerListComponent implements OnInit {
   getCustomers(): void {
     this.customerService.getCustomers()
       .subscribe(customers => this.customers = customers);
+     
   }
 
 }

@@ -1,1 +1,15 @@
-<p *ngFor="let item of  customers">{{item.customerName}}</p>
+<mat-list>
+    <div *ngFor="let customer of  customers">
+        <mat-list-item>
+
+            <a [routerLink]="[customer.id]">
+                <!-- <mat-icon >account_circle</mat-icon> -->
+                <!-- <img src="/src/assets/images/default-user.png" class="profileImage"> -->
+                <span>{{customer.customerName}}</span>
+            </a>
+
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+    </div>
+</mat-list>
