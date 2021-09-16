@@ -18,15 +18,47 @@ export class CustomerService {
       .pipe(
         tap(_ => this.log('fetched Customers')),
         catchError(this.handleError<Customer[]>('getCustomers', []))
-    );
+      );
   }
 
-  findCustomerByIdAsync(id:number): Observable<Customer> {
+  findCustomerByIdAsync(id: number): Observable<any> {
     return this.http.get<Customer>(`${this.url}/${id}`)
       .pipe(
         tap(_ => this.log('fetched Customer')),
         catchError(this.handleError<Customer>(`FindCustomerByIdAsync/${id}`))
-    );
+      );
+  }
+  saveCustommerAsync(customer: Customer): Observable<any> {
+    return this.http.post<Customer>(`${this.url}`, customer,
+    //  {
+    //   headers: {
+    //     "Content-Type": "application/json;charset=UTF-8",
+        
+    //   },
+    // }
+    )
+      .pipe(
+        tap(_ => this.log('fetched Customer')),
+        catchError(this.handleError<any>(`dd}`))
+      );
+  }
+
+  saveMockAsync(): Observable<any> {
+    return this.http.post<any>(`${this.url}`,{
+      "customerName":"MR Alam",
+      "fatherName":"Xyz",
+      "CountryId":1
+      },
+       {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .pipe(
+        tap(_ => this.log('fetched Customer')),
+        catchError(this.handleError<any>(`dd}`))
+      );
   }
 
 

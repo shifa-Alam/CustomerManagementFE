@@ -41,22 +41,28 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     BuildInComponent,
     CustomerListComponent,
     CustomerComponent,
-    DashboardComponent
+    DashboardComponent,
+ 
   ],
   imports: [
+  
+    FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule ,
     BrowserModule,
+    
     MatCheckboxModule,
     MatCheckboxModule,
     MatButtonModule,

@@ -1,1 +1,135 @@
+<!-- <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
 
+    <label for="first-name">Customer Name: </label>
+    <input id="customer-name" type="text" formControlName="customerName">
+
+    <label for="last-name">Father Name: </label>
+    <input id="father-name" type="text" formControlName="fatherName">
+
+    <label for="last-name">Mother Name: </label>
+    <input id="mother-name" type="text" formControlName="motherName">
+    <h2>Marital Status</h2>
+    <label>
+        <input type="radio" value="1" formControlName="maritalStatus">
+        <span>Single</span>
+    </label>
+    <label>
+        <input type="radio" value="2" formControlName="maritalStatus">
+        <span>Married</span>
+    </label>
+    <label>
+        <input type="radio" value="3" formControlName="maritalStatus">
+        <span>Others</span>
+    </label>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="countryId" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let country of countries" [value]="country.id">
+                {{country.countryName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div formArrayName="customerAddresses">
+        <h2>Addresses</h2>
+        <button (click)="addAddress()">+ Add another alias</button>
+
+        <div *ngFor="let item of address.controls; let i=index">
+            
+            <label for="item-{{ i }}">Address:</label>
+            <input id="item-{{ i }}" type="text" [formControlName]="i">
+        </div>
+    </div>
+    <p>Complete the form to enable button.</p>
+    <button type="submit" [disabled]="!customerForm.valid">Submit</button>
+</form> -->
+
+
+
+
+<form [formGroup]="customerForm" (ngSubmit)="onSave()">
+    <div class="form-group">
+        <button type="submit" value="Submit" class="btn btn-primary" [disabled]="!customerForm.valid">EDIT</button>
+        &nbsp;<button type="submit" value="Submit" class="btn btn-success"
+            [disabled]="!customerForm.valid">SAVE</button>
+        &nbsp; <button type="submit" value="Submit" class="btn btn-danger"
+            [disabled]="!customerForm.valid">DELETE</button>
+        &nbsp; <button type="submit" value="Submit" class="btn btn-info">CANCEL</button>
+
+    </div>
+    <div> <br>
+        <p class="h2">Basic Information</p>
+
+        <div class="form-group row">
+            <label for="customerName" class="col-sm-2 col-form-label">CUSTOMER NAME:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="customerName" formControlName="customerName">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="fatherName" class="col-sm-2 col-form-label">FATHER NAME:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="fatherName" formControlName="fatherName">
+            </div>
+        </div> <br>
+        <div class="form-group row">
+            <label for="motherName" class="col-sm-2 col-form-label">MOTHER NAME:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="motherName" formControlName="motherName">
+            </div>
+        </div> <br>
+        <div class="form-group row">
+            <label for="maritalStatus" class="col-sm-2 col-form-label">MARITAL STATUS:</label>
+            <div class="col-sm-10">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" type="radio" value=1 formControlName="maritalStatus">
+                    <label class="form-check-label" for="inlineRadio1"> SINGLE</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" type="radio" value=2 formControlName="maritalStatus">
+                    <label class="form-check-label" for="inlineRadio1"> MARRIED</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" type="radio" value=3 formControlName="maritalStatus">
+                    <label class="form-check-label" for="inlineRadio1"> OTHERS</label>
+                </div>
+
+            </div>
+        </div> <br>
+        <div class="form-group row">
+            <label for="motherName" class="col-sm-2 col-form-label">COUNTRY:</label>
+            <div class="col-sm-10">
+                <select class="form-select" aria-label="Default select example" formControlName="countryId">
+                    <option class="dropdown-item" selected> Select Country</option>
+                    <option class="dropdown-item" *ngFor="let country of countries" [value]="country.id">
+                        {{country.countryName}}</option>
+                </select>
+            </div>
+        </div> <br>
+
+    </div>
+    <div>
+        <p class="h2">Other Information</p>
+        <button class="btn btn-primary btn-sm" (click)="addAddress()">Add</button>
+        <div class="form-group row" formArrayName="customerAddresses">
+            <label for="exampleFormControlTextarea1">Addresses</label>
+            <div *ngFor="let item of address.controls; let i=index">
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <input class="form-control" id="item-{{ i }}" type="textArea" [formControlName]="i">
+                        <!-- <textarea class="form-control" id="item-{{ i }}" type="textArea" [formControlName]="i"></textarea> -->
+                    </div>
+                    <div class="col-sm-2" align="end">
+                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</form>
