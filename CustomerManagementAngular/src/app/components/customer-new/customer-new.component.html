@@ -1,24 +1,27 @@
-<div class="form-group">
-    <button type="submit" value="Submit" class="btn btn-primary" (click)="onUpdate()"
-        [disabled]="!customer.id">EDIT</button>
-    &nbsp;
-    <button type="submit" value="Submit" class="btn btn-success" (click)="onSave()"
-        [disabled]="customer.id">SAVE</button>
-    &nbsp;
-    <button type="submit" value="Submit" class="btn btn-danger" (click)="onDelete()"
-        [disabled]="!customer.id">DELETE</button>
-    &nbsp;
-    <button type="submit" value="Submit" class="btn btn-info" (click)="onCancel()"
-        [disabled]="!customer.id">CANCEL</button>
-
+<div class="form-group row" style="height: 50px;">
+    <div class="col-md-8">
+        <button type="submit" value="Submit" class="btn btn-primary" (click)="onUpdate()"
+            [disabled]="!customer.id">EDIT</button>
+        &nbsp;
+        <button type="submit" value="Submit" class="btn btn-success" (click)="onSave()"
+            [disabled]="customer.id">SAVE</button>
+        &nbsp;
+        <button type="submit" value="Submit" class="btn btn-danger" (click)="onDelete()"
+            [disabled]="!customer.id">DELETE</button>
+        &nbsp;
+        <button type="submit" value="Submit" class="btn btn-info" (click)="onCancel()"
+            [disabled]="!customer.id">CANCEL</button>
+    </div>
+    <div class="col-md-4" align="right" *ngIf="customer.customerPhoto">
+        <img [src]="imagePath" alt="image">
+    </div>
 </div>
 <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 <div>
-    <br>
     <p class="h2">Basic Information</p>
-
     <div class="form-group row">
-        <label for="customerName" class="col-sm-2 col-form-label">CUSTOMER NAME: <sup style="color: red;">*</sup></label>
+        <label for="customerName" class="col-sm-2 col-form-label">CUSTOMER NAME: <sup
+                style="color: red;">*</sup></label>
         <div class="col-sm-10">
             <app-input [placeholder]="''" [required]="true" (notify)="onCustomerNameChange($event)"
                 [value]="customer.customerName">
@@ -71,11 +74,12 @@
 
         </div>
     </div> <br>
-    <div class="form-group row">
+    <div class="form-group row" *ngIf="customer.id">
         <label for="motherName" class="col-sm-2 col-form-label">PHOTO:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             <input type="file" class="form-control" id="customFile" (change)="onFileSelected($event)" />
         </div>
+        <button type="button" class="col-sm-2 btn btn-success btn-sm" *ngIf="this.selectedFile"(click)="onUpload()">Upload</button>
     </div>
 
 </div>

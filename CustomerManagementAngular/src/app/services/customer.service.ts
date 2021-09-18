@@ -38,11 +38,11 @@ export class CustomerService {
       
   }
   saveCustommerAsync(customer: any): Observable<any> {
-    return this.http.post<any>(`${this.url}`, JSON.stringify(customer),
+    return this.http.post<any>(`${this.url}`, (customer),
     {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
+      // headers: {
+      //   "Content-Type": "application/json;charset=UTF-8",
+      // },
       reportProgress: true,
       observe: 'events'
     })
@@ -88,6 +88,25 @@ export class CustomerService {
         catchError(this.handleError)
       );
   }
+
+  upload(file: any): Observable<any> {
+    return this.http.post<any>(`${this.url}/Upload`, (file),
+    {
+      // headers: {
+      //   "Content-Type": "application/json;charset=UTF-8",
+      // },
+      reportProgress: true,
+      observe: 'events'
+    })
+    .pipe(
+      tap(() => {
+        this._refreshNeeded$.next();
+      }),
+
+      catchError(this.handleError)
+    );
+  }
+
 
   /**
  * Handle Http operation that failed.

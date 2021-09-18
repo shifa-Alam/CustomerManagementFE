@@ -10,7 +10,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
   constructor(private customerService: CustomerService) { }
-  profileImage: string = "/src/assets/images/default-user.png";
+  profileImage: string = "default-user.png";
   ngOnInit() {
     this.customerService.refreshNeeded$.subscribe(() => {
       this.getCustomers();

@@ -26,7 +26,9 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
   id: number = 0;
   countries: Country[] = [];
   isLoading: boolean = false;
-
+  selectedFile: any;
+  imagePath: string = "app/assets/default-user.png";
+  
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -46,9 +48,6 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
       this.id = Number(params.get('id'));
       if (this.id > 0) this.findCustomer(this.id);
     })
-    // this.customerService.refreshNeeded$.subscribe(() => {
-    //   this.findCustomer(this.id);
-    // })
     this.addAddress();
   }
   loadCountries(): void {
@@ -56,24 +55,7 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
       .subscribe(countries => this.countries = countries);
 
   }
-  onFileSelected(event: any) {
-    // const reader = new FileReader();
-
-    // if (event.target.files && event.target.files.length) {
-    //   const [file] = event.target.files;
-    //   reader.readAsDataURL(file);
-
-    //   reader.onload = () => {
-    //     // this.imageUrl = reader.result as string;
-    //     this.customer.customerPhoto = reader.result;
-    //     // this.myForm.patchValue({
-    //     //   fileSource: reader.result
-    //     // });
-
-    //   };
-
-    // }
-  }
+  
 
   onCustomerNameChange(result: any) {
     this.customer.customerName = result.value;
@@ -94,7 +76,7 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
     this.customer.customerAddresses.push(new CustomerAddress());
   }
 
- 
+
   onSave() {
 
     this.customerService.saveCustommerAsync(this.customer).subscribe((event) => {
@@ -154,14 +136,14 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
   onCancel() {
     this.router.navigate(['']);
   }
-  saveAddress(item:any) {
-    item.customerId=this.customer.id;
+  saveAddress(item: any) {
+    item.customerId = this.customer.id;
     this.customerAddressService.saveCustommerAddressAsync(item).subscribe((event) => {
       if (event.type === HttpEventType.Response) {
         this._snackBarService.success("Saved Successfully!");
         this.isLoading = false;
         this.findCustomer(this.id);
-        
+
       }
     },
       error => {
@@ -212,31 +194,37 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
         }
       });
   }
-  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+  onUpload() {
+    const fd = new FormData();
+    fd.append('myFile', this.selectedFile, this.selectedFile.name);
+    fd.append('customerId', `${this.customer.id}`);
+    
+    this.customerService.upload(fd).subscribe(
+      e => {
+        if (e.type === HttpEventType.Response) {
+          this._snackBarService.success("Upload Successfully!");
+          this.isLoading = false;
+          this.findCustomer(this.id);
+        }
+      },
+        error => {
+          this._snackBarService.error("Something Wrong");
+          this.isLoading = false;
+        }
+    )
+  }
 
 
   findCustomer(id: number) {
     this.customerService.findCustomerByIdAsync(id).subscribe(
       e => {
         this.customer = e;
+        this.imagePath = "data:image/jpeg;base64," +this.customer.customerPhoto;
         if (this.customer) {
           console.log(this.customer);
           // this.setValue();

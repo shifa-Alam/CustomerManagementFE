@@ -1,3 +1,22 @@
 .margin2px{
     margin-bottom: 2px;
 }
+.example-header-image {
+   
+    background-size: cover;
+  }
+
+  img {
+    border-radius: 5%;
+    height: 80px;
+    width: 80px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all 0.3s ease;
+    text-decoration: none; 
+    /* cursor: pointer; */
+}
