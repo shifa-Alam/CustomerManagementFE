@@ -131,6 +131,9 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
             }
           );
         }
+        else{
+          this.isLoading = false;
+        }
       });
   }
   onCancel() {
@@ -191,6 +194,8 @@ export class CustomerNewComponent implements OnInit, AfterContentChecked, OnDest
               this.isLoading = false;
             }
           );
+        }else{
+          this.isLoading = false;
         }
       });
   }
