@@ -2,3 +2,26 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.successSnackbar {
+    margin-top: 55px !important;
+    width: auto;
+    font-style: italic;
+    color: white;
+    background-color: #89c03d;
+  }
+.errorSnackbar {
+    margin-top: 55px !important;
+    width: auto;
+    font-style: bold;
+    color: white;
+  
+    background-color: #514d37;
+  }
+  .errorSnackbarRed {
+    margin-top: 55px !important;
+    width: auto;
+    font-style: bold;
+    color: white;
+    background-color: #5b1b0e;
+   
+  }

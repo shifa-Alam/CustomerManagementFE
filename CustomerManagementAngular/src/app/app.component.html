@@ -1,6 +1,8 @@
 
 <div class="container-fluid">
-
+    <div>
+        <app-snack-bar ></app-snack-bar>
+      </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     
@@ -10,9 +12,12 @@
                     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
                 </button>
     
-                <a class="title" routerLink="/dashboard">{{title}}</a>
+                <a class="title" routerLink="">{{title}}</a> &nbsp;
+                <a class="btn btn-warning btn-sm"  routerLink="" > Add New</a>   
                 <span class="spacer"></span>
-                <span class="spacer"></span>          
+               
+                <span class="spacer"></span>
+                     
             </mat-toolbar>
     
         </div>

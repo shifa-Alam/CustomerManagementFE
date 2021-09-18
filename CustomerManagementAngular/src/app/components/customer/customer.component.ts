@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.css']
 })
-export class CustomerComponent implements OnInit, AfterContentChecked, OnDestroy, OnChanges{
+export class CustomerComponent implements OnInit, AfterContentChecked, OnDestroy, OnChanges {
   private unsubscribe$ = new Subject<void>();
   customer: Customer = new Customer();
   id: number = 0;
@@ -64,8 +64,10 @@ export class CustomerComponent implements OnInit, AfterContentChecked, OnDestroy
   }
 
   onSave() {
-    this.customerService.saveCustommerAsync(this.customerForm.value)
-      .subscribe(customer => this.customer = customer);
+    // console.log(this.customerForm.value);
+    this.customer = this.customerForm.value;
+    console.log(this.customer);
+    this.customerService.saveCustommerAsync( this.customer).subscribe();
   }
 
 
@@ -132,9 +134,9 @@ export class CustomerComponent implements OnInit, AfterContentChecked, OnDestroy
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    console.log('this id  ' +this.id);
+    console.log('this id  ' + this.id);
     for (let propName in changes) {
-      
+
       if (propName === "id") {
         let changedProp = changes[propName];
         if (!changedProp.firstChange) {

@@ -1,0 +1,113 @@
+<div class="form-group">
+    <button type="submit" value="Submit" class="btn btn-primary" (click)="onUpdate()"
+        [disabled]="!customer.id">EDIT</button>
+    &nbsp;
+    <button type="submit" value="Submit" class="btn btn-success" (click)="onSave()"
+        [disabled]="customer.id">SAVE</button>
+    &nbsp;
+    <button type="submit" value="Submit" class="btn btn-danger" (click)="onDelete()"
+        [disabled]="!customer.id">DELETE</button>
+    &nbsp;
+    <button type="submit" value="Submit" class="btn btn-info" (click)="onCancel()"
+        [disabled]="!customer.id">CANCEL</button>
+
+</div>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<div>
+    <br>
+    <p class="h2">Basic Information</p>
+
+    <div class="form-group row">
+        <label for="customerName" class="col-sm-2 col-form-label">CUSTOMER NAME: <sup style="color: red;">*</sup></label>
+        <div class="col-sm-10">
+            <app-input [placeholder]="''" [required]="true" (notify)="onCustomerNameChange($event)"
+                [value]="customer.customerName">
+            </app-input>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="fatherName" class="col-sm-2 col-form-label">FATHER NAME:</label>
+        <div class="col-sm-10">
+            <app-input [placeholder]="''" (notify)="onFatherNameChange($event)" [value]="customer.fatherName">
+            </app-input>
+        </div>
+    </div> <br>
+    <div class="form-group row">
+        <label for="motherName" class="col-sm-2 col-form-label">MOTHER NAME:</label>
+        <div class="col-sm-10">
+            <app-input [placeholder]="''" (notify)="onMotherNameChange($event)" [value]="customer.motherName">
+            </app-input>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="maritalStatus" class="col-sm-2 col-form-label">MARITAL STATUS:</label>
+        <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" type="radio" [(ngModel)]="customer.maritalStatus"
+                    [value]="1">
+                <label class="form-check-label" for="inlineRadio1"> SINGLE</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" type="radio" [(ngModel)]="customer.maritalStatus"
+                    [value]=2>
+                <label class="form-check-label" for="inlineRadio1"> MARRIED</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" [(ngModel)]="customer.maritalStatus" type="radio"
+                    [value]=3>
+                <label class="form-check-label" for="inlineRadio1"> OTHERS</label>
+            </div>
+
+        </div>
+    </div> <br>
+    <div class="form-group row">
+        <label for="motherName" class="col-sm-2 col-form-label">COUNTRY: <sup style="color: red;">*</sup></label>
+        <div class="col-sm-10">
+            <app-combo-box [list]="countries" (selectValue)="onCountrySelect($event)" [required]="true"
+                [placeHolder]="''" [value]="customer.countryId">
+            </app-combo-box>
+
+        </div>
+    </div> <br>
+    <div class="form-group row">
+        <label for="motherName" class="col-sm-2 col-form-label">PHOTO:</label>
+        <div class="col-sm-10">
+            <input type="file" class="form-control" id="customFile" (change)="onFileSelected($event)" />
+        </div>
+    </div>
+
+</div>
+<br>
+<div>
+    <p class="h2">Other Information</p>
+    <div class="form-group row">
+        <button type="button" class="col-md-1 btn btn-primary btn-sm" (click)="addAddress()">Add</button>
+
+        <label for="exampleFormControlTextarea1" class="col-md-8" align="center">Addresses</label>
+    </div>
+    <br>
+    <div class="form-group row">
+
+        <div *ngFor="let item of customer.customerAddresses; let i=index">
+            <div class="form-group row">
+                <div class="col-sm-9">
+                    <app-input (notify)="onAddressValueChange($event,i)" [value]="item.address">
+                    </app-input>
+                </div>
+                <div class="col-sm-3" align="end">
+                    <button type="button" class="btn btn-success btn-sm" (click)="saveAddress(item)"
+                        *ngIf="customer.id && !item.id">Save</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addressUpdate(item)"
+                        *ngIf="customer.id">Edit</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-danger btn-sm" (click)="addressDelete(item)"
+                        *ngIf="customer.id">Delete</button>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

@@ -12,13 +12,16 @@ export class CustomerListComponent implements OnInit {
   constructor(private customerService: CustomerService) { }
   profileImage: string = "/src/assets/images/default-user.png";
   ngOnInit() {
+    this.customerService.refreshNeeded$.subscribe(() => {
+      this.getCustomers();
+    })
     this.getCustomers();
   }
 
   getCustomers(): void {
     this.customerService.getCustomers()
       .subscribe(customers => this.customers = customers);
-     
+
   }
 
 }

@@ -43,6 +43,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { CustomerNewComponent } from './components/customer-new/customer-new.component';
 
 @NgModule({
   declarations: [
@@ -51,49 +52,19 @@ import { SharedModule } from './shared/shared.module';
     CustomerListComponent,
     CustomerComponent,
     DashboardComponent,
+    CustomerNewComponent,
  
   ],
   imports: [
-  
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule,
+    
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule ,
     BrowserModule,
+   
     
-    MatCheckboxModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatButtonToggleModule,
-    MatChipsModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatDialogModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule
 
   ],
   providers: [],

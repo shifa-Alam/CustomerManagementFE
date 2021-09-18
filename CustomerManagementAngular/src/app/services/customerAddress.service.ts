@@ -2,32 +2,33 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Customer } from '../models/customer';
+import { CustomerAddress } from '../models/customerAddress';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class CustomerAddressService {
   private _refreshNeeded$ = new Subject<void>();
   error: any;
   get refreshNeeded$() {
     return this._refreshNeeded$;
   }
-  private url = 'https://localhost:44395/api/customer';
+  private url = 'https://localhost:44395/api/customerAddress';
   constructor(private http: HttpClient
   ) { }
 
-  /** GET Customeres from the server */
-  getCustomers(): Observable<Customer[]> {
+  /** GET CustomerAddresses from the server */
+  getCustomerAddresss(): Observable< CustomerAddress[]> {
     return this.http.get<any>(this.url,)
       .pipe(
-        tap(_ => this.log('fetched Customers')),
+        tap(_ => this.log('fetched CustomerAddresss')),
         catchError(this.handleError)
       );
   }
 
-  findCustomerByIdAsync(id: number): Observable<Customer> {
-    return this.http.get<Customer>(`${this.url}/${id}`,)
+  findCustomerAddressByIdAsync(id: number): Observable< CustomerAddress> {
+    return this.http.get< CustomerAddress>(`${this.url}/${id}`,)
     .pipe(
       tap(() => {
       
@@ -37,8 +38,8 @@ export class CustomerService {
     );
       
   }
-  saveCustommerAsync(customer: any): Observable<any> {
-    return this.http.post<any>(`${this.url}`, JSON.stringify(customer),
+  saveCustommerAddressAsync(customerAddress: CustomerAddress): Observable<any> {
+    return this.http.post<any>(`${this.url}`, JSON.stringify(customerAddress),
     {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -48,14 +49,14 @@ export class CustomerService {
     })
     .pipe(
       tap(() => {
-        this._refreshNeeded$.next();
+          this._refreshNeeded$.next();
       }),
 
       catchError(this.handleError)
     );
   }
-  updateCustomerAsync(customer: Customer): Observable<any> {
-    return this.http.put<any>(`${this.url}`, JSON.stringify(customer),
+  updateCustomerAddressAsync(customerAddress:  CustomerAddress): Observable<any> {
+    return this.http.put<any>(`${this.url}`, JSON.stringify(customerAddress),
     {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -65,13 +66,13 @@ export class CustomerService {
     })
     .pipe(
       tap(() => {
-        this._refreshNeeded$.next();
+          this._refreshNeeded$.next();
       }),
 
       catchError(this.handleError)
     );
   }
-  deleteCustomerAsync(id: number): Observable<any> {
+  deleteCustomerAddressAsync(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}/${id}`,
       {
         headers: {
@@ -82,7 +83,7 @@ export class CustomerService {
       })
       .pipe(
         tap(() => {
-          this._refreshNeeded$.next();
+            //this._refreshNeeded$.next();
         }),
 
         catchError(this.handleError)
